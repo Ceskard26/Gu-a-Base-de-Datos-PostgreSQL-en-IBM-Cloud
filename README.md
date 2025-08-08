@@ -20,7 +20,7 @@
 1. Inicie sesión en [IBM Cloud](https://cloud.ibm.com)
 2. En el panel principal, haga clic en **"Catalog"** (Catálogo)
 
-<img width="2880" height="1170" alt="image" src="https://github.com/user-attachments/assets/a469169c-8855-43a1-bfa1-bf89ea9be4e4" />
+<img width="2880" height="1170" alt="image" src="https://github.com/user-attachments/assets/8ad8749b-6111-4e6b-be64-56826b6f8d32" />
 
 ### Paso 2: Buscar el Servicio PostgreSQL
 
@@ -54,47 +54,18 @@
 
 ### Paso 1: Obtener las Credenciales
 
-1. En el panel lateral izquierdo, haga clic en **"Service Credentials"**
-2. Si no hay credenciales existentes, haga clic en **"New credential"**
-3. Asigne un nombre (ej: `admin-credentials`) y haga clic en **"Add"**
+1. Primero ir a la pestaña de settings en donde está la opción de generar contraseña.
 
-**[Screenshot necesario: Panel de Service Credentials con el botón "New credential"]**
+<img width="2842" height="1512" alt="image" src="https://github.com/user-attachments/assets/78a0fd46-89a6-480f-9582-4b7f88123bb1" />
 
-### Paso 3: Ver los Detalles de Conexión
+2. Luego de esto crear dar click en generar la contraseña y guardar los cambios.
 
-1. Expanda las credenciales creadas haciendo clic en **"View credentials"**
-2. Tome nota de los siguientes valores:
-   - `hostname`
-   - `port`
-   - `username`
-   - `password`
-   - `database`
+   <img width="2200" height="678" alt="image" src="https://github.com/user-attachments/assets/48ee466e-0854-4187-8e53-6013ecba4c93" />
 
-**[Screenshot necesario: Credenciales expandidas mostrando los campos de conexión (con datos sensibles censurados)]**
+3. Luego ir a la vista **Overview** scrollear hasta el fondo y copiar el endpoint.
 
-Ejemplo de estructura de credenciales:
-```json
-{
-  "connection": {
-    "postgres": {
-      "authentication": {
-        "method": "direct",
-        "password": "su-password-aqui",
-        "username": "ibm_cloud_admin"
-      },
-      "database": "ibmclouddb",
-      "hosts": [
-        {
-          "hostname": "ejemplo-host.databases.appdomain.cloud",
-          "port": 5432
-        }
-      ]
-    }
-  }
-}
-```
+<img width="1165" height="624" alt="Captura de pantalla 2025-08-08 a la(s) 3 38 46 p  m" src="https://github.com/user-attachments/assets/715bb84d-c5dc-4c59-8f04-6ae24e480b95" />
 
----
 
 ## 3. Conexión a la Base de Datos con psql
 
@@ -115,31 +86,11 @@ brew install postgresql
 Descargue PostgreSQL desde [postgresql.org](https://www.postgresql.org/download/windows/)
 
 ### Comando de Conexión
+1. Primero debemos conectarnos a la CLI de IBM Cloud, vamos a perfil:
 
-Utilice el siguiente formato de comando, reemplazando los valores con sus credenciales:
+<img width="276" height="320" alt="Captura de pantalla 2025-08-04 a la(s) 5 33 02 p  m" src="https://github.com/user-attachments/assets/f86eb79a-fc8c-4b45-8bd0-9c1eae87d498" />
 
-```bash
-psql "host=SU-HOSTNAME port=5432 dbname=ibmclouddb user=ibm_cloud_admin password=SU-PASSWORD sslmode=require"
-```
-
-**Ejemplo práctico:**
-```bash
-psql "host=ejemplo-host.databases.appdomain.cloud port=5432 dbname=ibmclouddb user=ibm_cloud_admin password=mi_password_secreto sslmode=require"
-```
-
-### Verificar la Conexión
-
-Si la conexión es exitosa, verá el prompt de PostgreSQL:
-```
-psql (17.x, server 17.x)
-SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
-Type "help" for help.
-
-ibmclouddb=>
-```
-
----
-
+damos click y copiamos
 ## 4. Operaciones en la Base de Datos
 
 ### Creación de Tablas
