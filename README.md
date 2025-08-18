@@ -205,4 +205,4 @@ Verifique que su IP esté permitida en las configuraciones de red de IBM Cloud.
 Use las credenciales de administrador proporcionadas por IBM Cloud para operaciones DDL (CREATE, ALTER, DROP).
 
 ---
-Autor: (CeskarD26)[https://github.com/Ceskard26]
+Autor: [CeskarD26](https://github.com/Ceskard26)
