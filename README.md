@@ -1,4 +1,3 @@
-# Guia-Base-de-Datos-PostgreSQL-en-IBM-Cloud
 # Guía: Base de Datos PostgreSQL en IBM Cloud
 
 ## Tabla de Contenidos
@@ -95,17 +94,7 @@ damos click y copiamos
 
 ### Creación de Tablas
 
-#### Ejemplo 1: Tabla de Usuarios
-```sql
-CREATE TABLE usuarios (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-#### Ejemplo 2: Tabla de Productos
+#### Ejemplo: Tabla de Productos
 ```sql
 CREATE TABLE productos (
     id SERIAL PRIMARY KEY,
@@ -116,28 +105,7 @@ CREATE TABLE productos (
     activo BOOLEAN DEFAULT true
 );
 ```
-
-#### Ejemplo 3: Tabla de Transacciones
-```sql
-CREATE TABLE transacciones (
-    id SERIAL PRIMARY KEY,
-    usuario_id INTEGER REFERENCES usuarios(id),
-    producto_id INTEGER REFERENCES productos(id),
-    cantidad INTEGER NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
-    fecha_transaccion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
 ### Inserción de Datos
-
-#### Insertar usuarios:
-```sql
-INSERT INTO usuarios (username, email) VALUES 
-('juan_perez', 'juan.perez@email.com'),
-('maria_garcia', 'maria.garcia@email.com'),
-('carlos_lopez', 'carlos.lopez@email.com');
-```
 
 #### Insertar productos:
 ```sql
@@ -148,15 +116,6 @@ INSERT INTO productos (nombre, precio, stock, categoria) VALUES
 ('Monitor 24"', 199.99, 8, 'Electrónicos');
 ```
 
-#### Insertar transacciones:
-```sql
-INSERT INTO transacciones (usuario_id, producto_id, cantidad, total) VALUES 
-(1, 1, 1, 899.99),
-(2, 2, 2, 51.00),
-(3, 3, 1, 120.00),
-(1, 4, 1, 199.99);
-```
-
 ### Actualización de Datos
 
 #### Actualizar precio de un producto:
@@ -164,20 +123,6 @@ INSERT INTO transacciones (usuario_id, producto_id, cantidad, total) VALUES
 UPDATE productos 
 SET precio = 849.99 
 WHERE id = 1;
-```
-
-#### Actualizar stock después de una venta:
-```sql
-UPDATE productos 
-SET stock = stock - 1 
-WHERE id = 1;
-```
-
-#### Actualizar email de un usuario:
-```sql
-UPDATE usuarios 
-SET email = 'nuevo.email@empresa.com' 
-WHERE username = 'juan_perez';
 ```
 
 #### Actualizar múltiples campos:
@@ -195,23 +140,10 @@ DELETE FROM productos
 WHERE id = 4;
 ```
 
-#### Eliminar transacciones de un usuario específico:
-```sql
-DELETE FROM transacciones 
-WHERE usuario_id = 3;
-```
-
 #### Eliminar productos sin stock:
 ```sql
 DELETE FROM productos 
 WHERE stock = 0;
-```
-
-#### Eliminar usuarios inactivos (ejemplo con condición de fecha):
-```sql
-DELETE FROM usuarios 
-WHERE fecha_creacion < '2023-01-01' 
-AND id NOT IN (SELECT DISTINCT usuario_id FROM transacciones WHERE usuario_id IS NOT NULL);
 ```
 
 ---
@@ -230,9 +162,7 @@ AND id NOT IN (SELECT DISTINCT usuario_id FROM transacciones WHERE usuario_id IS
 
 ### Ver datos de una tabla:
 ```sql
-SELECT * FROM usuarios;
 SELECT * FROM productos;
-SELECT * FROM transacciones;
 ```
 
 ### Salir de psql:
@@ -248,15 +178,7 @@ Para verificar que todas las operaciones se ejecutaron correctamente:
 
 ```sql
 -- Verificar datos en tablas
-SELECT COUNT(*) as total_usuarios FROM usuarios;
 SELECT COUNT(*) as total_productos FROM productos;
-SELECT COUNT(*) as total_transacciones FROM transacciones;
-
--- Ver resumen de transacciones por usuario
-SELECT u.username, COUNT(t.id) as num_transacciones, SUM(t.total) as total_gastado
-FROM usuarios u
-LEFT JOIN transacciones t ON u.id = t.usuario_id
-GROUP BY u.username;
 ```
 
 ---
@@ -281,3 +203,6 @@ Verifique que su IP esté permitida en las configuraciones de red de IBM Cloud.
 
 ### Permisos insuficientes:
 Use las credenciales de administrador proporcionadas por IBM Cloud para operaciones DDL (CREATE, ALTER, DROP).
+
+---
+Autor: (CeskarD26)[https://github.com/Ceskard26]
